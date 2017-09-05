@@ -1,0 +1,50 @@
+{
+  "name": "secure-github-webhook",
+  "version": "1.0.0",
+  "description": "This webtask middleware helps to secure your GitHub webhook",
+  "main": "index.js",
+  "devDependencies": {
+    "hoek": "^4.2.0",
+    "lab": "^14.2.0",
+    "shot": "^3.4.2"
+  },
+  "scripts": {
+    "preversion": "npm run test",
+    "test": "lab -cvL"
+  },
+  "keywords": [
+    "github",
+    "webhook",
+    "webtask",
+    "middleware"
+  ],
+  "author": "javier.centurion@auth0.com",
+  "license": "MIT",
+  "peerDependencies": {
+    "@webtask/middleware-compiler": "^1.0.0"
+  },
+  "webtask-middleware": [
+    {
+      "name": "Secure GitHub Webhook",
+      "secrets": [
+        {
+          "name": "GH-WEBHOOK-SECRET",
+          "description": "The secret token used to create a hash signature with each payload.",
+          "type": "password"
+        }
+      ]
+    }
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcenturion/secure-github-webhook.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jcenturion/secure-github-webhook/issues"
+  },
+  "homepage": "https://github.com/jcenturion/secure-github-webhook#readme"
+}
