@@ -1,12 +1,13 @@
 {
   "name": "secure-github-webhook",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This webtask middleware helps to secure your GitHub webhook",
   "main": "index.js",
   "devDependencies": {
     "hoek": "^4.2.0",
     "lab": "^14.2.0",
-    "shot": "^3.4.2"
+    "shot": "^3.4.2",
+    "sinon": "^3.2.1"
   },
   "scripts": {
     "preversion": "npm run test",
@@ -38,7 +39,9 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.17.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jcenturion/secure-github-webhook.git"

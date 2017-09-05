@@ -7,6 +7,8 @@ const Hoek = require('hoek');
 const Lab = require('lab');
 const Shot = require('shot');
 const crypto = require('crypto');
+const Sinon = require('sinon');
+const bodyParser = require('body-parser');
 
 const lab = Lab.script();
 const {
@@ -22,21 +24,23 @@ describe('github webhhok secure middleware', {
   parallel: false
 }, () => {
   it('accepts a request with a valid signature', done => {
+    const sandbox = Sinon.sandbox.create();
     const token = Crypto.randomBytes(32).toString('hex');
     const run = createMockRunner({
       secrets: {
         'GH-WEBHOOK-SECRET': token
       }
     });
-
     const hash = crypto
       .createHmac('sha1', token)
       .update(JSON.stringify({ test: 'test' }))
       .digest('hex');
 
+    sandbox.stub(bodyParser, 'json').resolves();
+
     return run({
         headers: {
-          'X-Hub-Signature': `sha1=${hash}`
+          'x-hub-signature': `sha1=${hash}`
         }
       },
       error => {
