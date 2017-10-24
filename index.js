@@ -10,7 +10,10 @@ function createGhSecureWebhookMiddleware() {
   return function middleware(req, res, next) {
     bodyParser.json()(req, res, function () {
       const ctx = req.webtaskContext;
-
+      
+      //ensure that the context uses the parsed body
+      ctx.body = req.body;
+      
       if (ctx.secrets && ctx.secrets[AUTH_SECRET_NAME]) {
         const hash = crypto
                       .createHmac('sha1', ctx.secrets[AUTH_SECRET_NAME])
